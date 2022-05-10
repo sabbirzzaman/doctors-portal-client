@@ -5,6 +5,7 @@ import ContactUs from './Pages/Contact Us/ContactUs';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Reviews from './Pages/Reviews/Reviews';
+import Footer from './Pages/Shared/Footer';
 import Header from './Pages/Shared/Header';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 ></Route>
                 <Route path="/login" element={<Login></Login>}></Route>
             </Routes>
+            <Footer></Footer>
         </>
     );
 }

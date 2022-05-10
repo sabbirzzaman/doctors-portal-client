@@ -16,7 +16,7 @@ const Contact = () => {
                         <input className='input w-full max-w-xl mb-5' placeholder='Subject' type="text" />
                     </div>
                     <div>
-                        <textarea className='input w-full max-w-xl mb-5 pt-2' placeholder='Your Message' cols="30"></textarea>
+                        <textarea className='textarea w-full max-w-xl mb-5 pt-2' placeholder='Your Message' rows="5"></textarea>
                     </div>
                     <div>
                         <input type="submit" className='btn btn-primary bg-gradient-to-r from-secondary to-accent text-white border-0' value="Submit" />
