@@ -4,23 +4,27 @@ import Button from '../common/button';
 
 const DentalCare = () => {
     return (
-        <section className="hero min-h-screen pb-20">
-            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1040px] hero-content flex-col justify-between gap-12 lg:flex-row p-0">
-                <div className='lg:w-1/2'>
+        <section className="py-20">
+            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px] mx-auto hero-content flex-col justify-between gap-12 lg:flex-row p-0">
+                <div className="lg:w-1/2">
                     <img
                         src={treatment}
                         className="rounded-lg shadow-2xl"
                         alt="treatment"
                     />
                 </div>
-                <div className='lg:w-1/2'>
+                <div className="lg:w-1/2">
                     <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-                        Your New Smile Starts Here
+                        Exceptional Dental Care, on Your Terms
                     </h1>
                     <p className="py-6">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the
+                        It is a long established fact that a reader will be
+                        distracted by the readable content of a page when
+                        looking at its layout. The point of using Lorem Ipsumis
+                        that it has a more-or-less normal distribution of
+                        letters,as opposed to using 'Content here, content
+                        here', making it look like readable English. Many
+                        desktop publishing packages and web page
                     </p>
                     <Button>Get Started</Button>
                 </div>
