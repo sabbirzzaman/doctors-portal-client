@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const menu = <>
-        <li><a>Home</a></li>
-        <li><a>About</a></li>
-        <li><a>Appointment</a></li>
-        <li><a>Reviews</a></li>
-        <li><a>Contact Us</a></li>
-        <li><a>Login</a></li>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/about'>About</Link></li>
+        <li><Link to='/appointment'>Appointment</Link></li>
+        <li><Link to='/reviews'>Reviews</Link></li>
+        <li><Link to='/contact'>Contact Us</Link></li>
+        <li><Link to='/login'>Login</Link></li>
     </>
     return (
-        <div className="navbar bg-base-100 max-w-[1240px] mx-auto">
+        <div className="navbar mx-auto max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px]">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -36,7 +37,7 @@ const Header = () => {
                         {menu}
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">Doctors Portal</a>
+                <Link to='/' className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
             </div>
             <div className="navbar-center hidden lg:flex lg:w-1/2 lg:justify-end">
                 <ul className="menu menu-horizontal p-0">
