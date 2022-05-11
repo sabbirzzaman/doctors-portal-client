@@ -4,7 +4,7 @@ import bg from '../../assets/images/appointment.png';
 const Contact = () => {
     return (
         <section style={{ backgroundImage: `url(${bg})` }}>
-            <div className='max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px] mx-auto text-center py-20'>
+            <div className='max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] mx-auto text-center py-20'>
                 <h4 className="font-bold text-lg text-secondary">Contact Us</h4>
                 <h2 className="text-4xl mb-8 text-white">Stay connected with us</h2>
 

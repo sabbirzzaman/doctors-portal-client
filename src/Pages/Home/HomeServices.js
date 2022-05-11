@@ -30,7 +30,7 @@ const HomeServices = () => {
     ];
     return (
         <section>
-            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px] mx-auto pb-20 text-center">
+            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] mx-auto pb-20 text-center">
                 <h4 className="font-bold text-lg text-secondary">
                     Our Service
                 </h4>

@@ -5,7 +5,7 @@ import Button from '../common/button';
 const DentalCare = () => {
     return (
         <section className="py-20">
-            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px] mx-auto hero-content flex-col justify-between gap-12 lg:flex-row p-0">
+            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] mx-auto hero-content flex-col justify-between gap-12 lg:flex-row p-0">
                 <div className="lg:w-1/2">
                     <img
                         src={treatment}

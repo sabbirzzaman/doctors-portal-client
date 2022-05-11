@@ -6,7 +6,7 @@ import Button from '../common/button';
 const Hero = () => {
     return (
         <section style={{backgroundImage: `url(${bg})`}} className="hero min-h-screen">
-            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px] hero-content flex-col justify-between gap-12 lg:flex-row-reverse p-0">
+            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768px] md:mb-16 lg:max-w-[1240px] hero-content flex-col justify-between gap-12 lg:flex-row-reverse p-0">
                 <img
                     src={chair}
                     className="lg:w-1/2 rounded-lg shadow-2xl"

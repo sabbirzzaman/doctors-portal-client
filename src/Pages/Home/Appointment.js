@@ -9,7 +9,7 @@ const Appointment = () => {
             className="my-20"
             style={{ backgroundImage: `url(${appointment})` }}
         >
-            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768] lg:max-w-[1240px] mx-auto flex justify-between items-center gap-12">
+            <div className="max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] mx-auto flex justify-between items-center gap-12">
                 <div className="lg:w-1/2 hidden lg:block">
                     <img
                         src={doctor}
