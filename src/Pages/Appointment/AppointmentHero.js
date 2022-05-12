@@ -4,7 +4,26 @@ import bg from '../../assets/images/bg.png';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
-const AppointmentHero = ({selected, setSelected}) => {
+const AppointmentHero = ({ date, setDate }) => {
+    const calendarCss = `
+        .my-selected:not([disabled]) { 
+            font-weight: bold; 
+            border-color: #19D3AE;
+            background-color: #19D3AE;
+            color: #fff;
+        }
+        .my-selected:hover:not([disabled]) { 
+            border-color: #19D3AE;
+            background-color: #19D3AE;
+            color: #fff;
+        }
+        .my-selected:focus:not([disabled]) { 
+            border-color: #19D3AE;
+            background-color: #19D3AE;
+            color: #fff;
+        }
+    `;
+
     return (
         <section
             style={{ backgroundImage: `url(${bg})` }}
@@ -17,11 +36,19 @@ const AppointmentHero = ({selected, setSelected}) => {
                     alt="hero chair"
                 />
                 <div>
+                    <style>{calendarCss}</style>
                     <DayPicker
                         className="shadow-xl bg-white p-6 rounded-2xl"
                         mode="single"
-                        selected={selected}
-                        onSelect={setSelected}
+                        selected={date}
+                        onSelect={setDate}
+                        modifiersClassNames={{
+                            selected: 'my-selected',
+                            today: 'my-today',
+                        }}
+                        modifiersStyles={{
+                            disabled: { fontSize: '75%' },
+                        }}
                     />
                 </div>
             </div>
