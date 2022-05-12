@@ -24,7 +24,7 @@
     {
       "_id": 3,
       "name": "Teeth Cleaning",
-      "slots": []
+      "slots": ["08.30 AM - 09.00 AM"]
     },
     {
       "_id": 4,
