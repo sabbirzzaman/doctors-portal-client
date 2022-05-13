@@ -10,6 +10,7 @@ const Header = () => {
         <li><Link to='/contact'>Contact Us</Link></li>
         <li><Link to='/login'>Login</Link></li>
     </>
+    
     return (
         <div className="navbar mx-auto max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] p-0">
             <div className="navbar-start">

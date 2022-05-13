@@ -67,6 +67,7 @@ const ServiceModal = ({ treatment, date }) => {
                                 className="input input-bordered w-full max-w-xl mb-5"
                                 placeholder="Full Name"
                                 type="text"
+                                required
                             />
                         </div>
                         <div>
@@ -75,6 +76,7 @@ const ServiceModal = ({ treatment, date }) => {
                                 className="input input-bordered w-full max-w-xl mb-5"
                                 placeholder="Phone Number"
                                 type="tel"
+                                required
                             />
                         </div>
                         <div>
@@ -83,6 +85,7 @@ const ServiceModal = ({ treatment, date }) => {
                                 className="input input-bordered w-full max-w-xl mb-5"
                                 placeholder="Email"
                                 type="email"
+                                required
                             />
                         </div>
                         <div>
@@ -90,6 +93,7 @@ const ServiceModal = ({ treatment, date }) => {
                                 type="submit"
                                 className="btn btn-primary w-full"
                                 value="Submit"
+                                required
                             />
                         </div>
                     </form>
