@@ -1,24 +1,26 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init'
 import { Link } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 
-const Login = () => {
+const SignUp = () => {
     const [
         signInWithGoogle, 
-        gUser, 
-        gLoading, 
+        gUser,
+        gLoading,
         gError
     ] = useSignInWithGoogle(auth);
 
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [updateProfile, updating] = useUpdateProfile(auth);
 
     const {
         register,
@@ -26,15 +28,16 @@ const Login = () => {
         handleSubmit,
     } = useForm();
 
-    const onSubmit = ({ email, password}) => {
-        signInWithEmailAndPassword(email, password)
+    const onSubmit = async ({name, email, password}) => {
+        await createUserWithEmailAndPassword(email, password)
+        await updateProfile({displayName: name})
     };
 
     if(user || gUser) {
         console.log(user || gUser);
     }
 
-    if( gLoading || loading) {
+    if( gLoading || loading || updating) {
         return <Loading></Loading>
     }
 
@@ -44,18 +47,42 @@ const Login = () => {
                 <div className="card w-96 bg-base-100 p-8 shadow-xl">
                     <div className="=items-center text-center mb-5">
                         <h2 className="text-center text-2xl font-bold">
-                            Login
+                            Sign Up
                         </h2>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full">
                             <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Your name"
+                                className="input input-bordered w-full"
+                                {...register('name', {
+                                    required: {
+                                        value: true,
+                                        message: 'Name is required',
+                                    },
+                                })}
+                            />
+                            <label className="label">
+                                {errors.name?.type === 'required' && (
+                                    <span className="label-text-alt text-red-500">
+                                        {errors.name.message}
+                                    </span>
+                                )}
+                            </label>
+                        </div>
+
+                        <div className="form-control w-full">
+                            <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input
                                 type="text"
-                                placeholder="Type here"
+                                placeholder="Your email"
                                 className="input input-bordered w-full"
                                 {...register('email', {
                                     required: {
@@ -88,7 +115,7 @@ const Login = () => {
                             </label>
                             <input
                                 type="password"
-                                placeholder="Type here"
+                                placeholder="Password"
                                 className="input input-bordered w-full"
                                 {...register('password', {
                                     required: {
@@ -119,22 +146,16 @@ const Login = () => {
                         <input
                             className="btn btn-primary w-full"
                             type="submit"
-                            value="Login"
+                            value="Sign Up"
                         />
 
                         <div className="divider">OR</div>
 
-                        <p className="mb-5 text-center">
-                            New to Doctors Portal?{' '}
-                            <Link className="text-secondary" to="/signup">
-                                Create new account
-                            </Link>
+                        <p className='mb-5 text-center'>
+                            Already have an account? <Link className='text-secondary' to='/login'>Login</Link>
                         </p>
 
-                        <button
-                            className="btn btn-outline w-full"
-                            onClick={() => signInWithGoogle()}
-                        >
+                        <button className="btn btn-outline w-full" onClick={() => signInWithGoogle()}>
                             Continue With Google
                         </button>
                     </form>
@@ -144,4 +165,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;

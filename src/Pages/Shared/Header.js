@@ -1,16 +1,39 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Header = () => {
-    const menu = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/appointment'>Appointment</Link></li>
-        <li><Link to='/reviews'>Reviews</Link></li>
-        <li><Link to='/contact'>Contact Us</Link></li>
-        <li><Link to='/login'>Login</Link></li>
-    </>
-    
+    const [user] = useAuthState(auth);
+
+    const menu = (
+        <>
+            <li>
+                <Link to="/">Home</Link>
+            </li>
+            <li>
+                <Link to="/about">About</Link>
+            </li>
+            <li>
+                <Link to="/appointment">Appointment</Link>
+            </li>
+            <li>
+                <Link to="/reviews">Reviews</Link>
+            </li>
+            <li>
+                <Link to="/contact">Contact</Link>
+            </li>
+            {user ? (
+                <button onClick={() => signOut(auth)} class="btn btn-secondary text-white">Sign Out</button>
+            ) : (
+                <li>
+                    <Link to="/login">Login</Link>
+                </li>
+            )}
+        </>
+    );
+
     return (
         <div className="navbar mx-auto max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] p-0">
             <div className="navbar-start">
@@ -38,12 +61,12 @@ const Header = () => {
                         {menu}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
+                <Link to="/" className="btn btn-ghost normal-case text-xl">
+                    Doctors Portal
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex lg:w-1/2 lg:justify-end">
-                <ul className="menu menu-horizontal p-0">
-                {menu}
-                </ul>
+                <ul className="menu menu-horizontal p-0">{menu}</ul>
             </div>
         </div>
     );
