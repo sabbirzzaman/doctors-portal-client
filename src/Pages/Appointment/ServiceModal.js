@@ -1,8 +1,11 @@
 import { format } from 'date-fns';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const ServiceModal = ({ treatment, date }) => {
     const { name, slots } = treatment;
+    const [{displayName, email}] = useAuthState(auth)
 
     const handleBooking = (e) => {
         e.preventDefault();
@@ -42,13 +45,37 @@ const ServiceModal = ({ treatment, date }) => {
                         <div>
                             <input
                                 className="input w-full max-w-xl mb-5"
-                                placeholder="Date"
                                 value={date && format(date, 'PP')}
                                 type="text"
                                 readOnly
                                 disabled
                             />
                         </div>
+
+                        <div>
+                            <input
+                                name="name"
+                                className="input input-bordered w-full max-w-xl mb-5"
+                                value={displayName || ''}
+                                type="text"
+                                readOnly
+                                disabled
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <input
+                                name="email"
+                                className="input input-bordered w-full max-w-xl mb-5"
+                                value={email || ''}
+                                type="email"
+                                readOnly
+                                disabled
+                                required
+                            />
+                        </div>
+
                         <div>
                             <select
                                 name="slot"
@@ -61,30 +88,13 @@ const ServiceModal = ({ treatment, date }) => {
                                 ))}
                             </select>
                         </div>
-                        <div>
-                            <input
-                                name="name"
-                                className="input input-bordered w-full max-w-xl mb-5"
-                                placeholder="Full Name"
-                                type="text"
-                                required
-                            />
-                        </div>
+
                         <div>
                             <input
                                 name="phone"
                                 className="input input-bordered w-full max-w-xl mb-5"
                                 placeholder="Phone Number"
                                 type="tel"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <input
-                                name="email"
-                                className="input input-bordered w-full max-w-xl mb-5"
-                                placeholder="Email"
-                                type="email"
                                 required
                             />
                         </div>

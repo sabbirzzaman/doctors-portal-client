@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [
@@ -35,12 +36,23 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || "/";
 
-    if(user || gUser) {
-        navigate(from, { replace: true });;
-    }
+    useEffect(() => {
+        if(user || gUser) {
+            navigate(from, { replace: true });;
+        }
+    }, [user, gUser, from, navigate])
 
     if(error || gError) {
         console.log(error || gError)
+    }
+
+    if(error || gError) {
+        if(error.code === 'auth/user-not-found') {
+            toast.error('Wrong email or password!');
+        }
+        if(error.code === 'auth/invalid-password') {
+            toast.error('Wrong password!');
+        }
     }
 
     if( gLoading || loading) {
