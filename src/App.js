@@ -4,6 +4,7 @@ import Appointment from './Pages/Appointment/Appointment';
 import ContactUs from './Pages/Contact Us/ContactUs';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
+import RequiredAuth from './Pages/Login/RequiredAuth';
 import SignUp from './Pages/Login/SignUp';
 import Reviews from './Pages/Reviews/Reviews';
 import Footer from './Pages/Shared/Footer';
@@ -14,20 +15,21 @@ function App() {
         <>
             <Header></Header>
             <Routes>
-                <Route path="/" element={<Home></Home>}></Route>
-                <Route path="/home" element={<Home></Home>}></Route>
-                <Route path="/about" element={<About></About>}></Route>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/home" element={<Home />}></Route>
+                <Route path="/about" element={<About />}></Route>
                 <Route
                     path="/appointment"
-                    element={<Appointment></Appointment>}
+                    element={
+                        <RequiredAuth>
+                            <Appointment />
+                        </RequiredAuth>
+                    }
                 ></Route>
-                <Route path="/reviews" element={<Reviews></Reviews>}></Route>
-                <Route
-                    path="/contact-us"
-                    element={<ContactUs></ContactUs>}
-                ></Route>
-                <Route path="/login" element={<Login></Login>}></Route>
-                <Route path="/signup" element={<SignUp></SignUp>}></Route>
+                <Route path="/reviews" element={<Reviews />}></Route>
+                <Route path="/contact-us" element={<ContactUs />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/signup" element={<SignUp />}></Route>
             </Routes>
             <Footer></Footer>
         </>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 
 const SignUp = () => {
@@ -22,6 +22,9 @@ const SignUp = () => {
 
     const [updateProfile, updating] = useUpdateProfile(auth);
 
+    const location = useLocation();
+    const navigate = useNavigate()
+
     const {
         register,
         formState: { errors },
@@ -33,8 +36,14 @@ const SignUp = () => {
         await updateProfile({displayName: name})
     };
 
+    const from = location.state?.from?.pathname || "/";
+
     if(user || gUser) {
-        console.log(user || gUser);
+        navigate(from, { replace: true });;
+    }
+
+    if(error || gError) {
+        console.log(error || gError)
     }
 
     if( gLoading || loading || updating) {

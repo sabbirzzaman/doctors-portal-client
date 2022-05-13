@@ -3,9 +3,10 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from './Loading';
 
 const Header = () => {
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
 
     const menu = (
         <>
@@ -25,7 +26,7 @@ const Header = () => {
                 <Link to="/contact">Contact</Link>
             </li>
             {user ? (
-                <button onClick={() => signOut(auth)} class="btn btn-secondary text-white">Sign Out</button>
+                <button onClick={() => signOut(auth)} className="btn btn-secondary text-white btn-sm">Sign Out</button>
             ) : (
                 <li>
                     <Link to="/login">Login</Link>
@@ -33,7 +34,11 @@ const Header = () => {
             )}
         </>
     );
-
+    
+    if( loading) {
+        return <Loading></Loading>
+    }
+    
     return (
         <div className="navbar mx-auto max-w-[325px] sm:max-w-[568px] md:max-w-[768px] lg:max-w-[1240px] p-0">
             <div className="navbar-start">
@@ -66,7 +71,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex lg:w-1/2 lg:justify-end">
-                <ul className="menu menu-horizontal p-0">{menu}</ul>
+                <ul className="menu menu-horizontal p-0 items-center">{menu}</ul>
             </div>
         </div>
     );
