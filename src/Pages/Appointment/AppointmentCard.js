@@ -30,7 +30,7 @@ const AppointmentCard = ({ date }) => {
                     ))}
                 </div>
                 {treatment && (
-                    <ServiceModal date={date} treatment={treatment}></ServiceModal>
+                    <ServiceModal date={date} treatment={treatment} setTreatment={setTreatment}></ServiceModal>
                 )}
             </div>
         </section>

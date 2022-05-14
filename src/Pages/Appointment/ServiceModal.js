@@ -2,22 +2,48 @@ import { format } from 'date-fns';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { toast } from 'react-toastify';
 
-const ServiceModal = ({ treatment, date }) => {
-    const { name, slots } = treatment;
-    const [{displayName, email}] = useAuthState(auth)
+const ServiceModal = ({ treatment, date, setTreatment }) => {
+    const { _id, name, slots } = treatment;
+    const [{ displayName, email }] = useAuthState(auth);
+
+    const formattedDate = format(date, 'PP');
 
     const handleBooking = (e) => {
         e.preventDefault();
         const bookingData = {
-            date: format(date, 'PP'),
-            slot: e.target.slot.value,
-            name: e.target.name.value,
-            phone: e.target.phone.value,
-            email: e.target.email.value
-        }
-        
-        console.log(bookingData)
+            treatmentId: _id,
+            treatmentName: name,
+            patientName: displayName,
+            patientEmail: email,
+            patientPhone: e.target.phone.value,
+            appointmentDate: formattedDate,
+            appointmentSlot: e.target.slot.value,
+        };
+
+        fetch('http://localhost:5000/treatment', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(bookingData),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    toast.success(
+                        `Your appointment set on ${bookingData.appointmentDate} at ${bookingData.appointmentSlot}`
+                    );
+                    setTreatment(null);
+                } else {
+                    toast.error(
+                        `You already have an appointment on ${data.booking?.appointmentDate} at ${data.booking?.appointmentSlot}`
+                    );
+                    setTreatment(null);
+                }
+                console.log(data);
+            });
     };
 
     return (
@@ -45,7 +71,7 @@ const ServiceModal = ({ treatment, date }) => {
                         <div>
                             <input
                                 className="input w-full max-w-xl mb-5"
-                                value={date && format(date, 'PP')}
+                                value={date && formattedDate}
                                 type="text"
                                 readOnly
                                 disabled
