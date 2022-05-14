@@ -43,10 +43,6 @@ const Login = () => {
     }, [user, gUser, from, navigate])
 
     if(error || gError) {
-        console.log(error || gError)
-    }
-
-    if(error || gError) {
         if(error.code === 'auth/user-not-found') {
             toast.error('Wrong email or password!');
         }
@@ -76,7 +72,7 @@ const Login = () => {
                             </label>
                             <input
                                 type="text"
-                                placeholder="Type here"
+                                placeholder="Your email"
                                 className="input input-bordered w-full"
                                 {...register('email', {
                                     required: {
@@ -106,10 +102,11 @@ const Login = () => {
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text">Password</span>
+                                <span class="label-text-alt"><Link className='text-secondary' to='/forget-password'>Forget Password?</Link></span>
                             </label>
                             <input
                                 type="password"
-                                placeholder="Type here"
+                                placeholder="Password"
                                 className="input input-bordered w-full"
                                 {...register('password', {
                                     required: {

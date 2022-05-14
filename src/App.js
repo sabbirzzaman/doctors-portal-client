@@ -11,6 +11,7 @@ import Footer from './Pages/Shared/Footer';
 import Header from './Pages/Shared/Header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ForgetPassword from './Pages/Login/ForgetPassword';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/contact-us" element={<ContactUs />}></Route>
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/signup" element={<SignUp />}></Route>
+                <Route path="/forget-password" element={<ForgetPassword />} ></Route>
             </Routes>
             <Footer></Footer>
             <ToastContainer />
