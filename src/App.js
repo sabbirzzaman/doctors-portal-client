@@ -12,28 +12,44 @@ import Header from './Pages/Shared/Header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ForgetPassword from './Pages/Login/ForgetPassword';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import MyAppointment from './Pages/Dashboard/MyAppointment';
+import MyReviews from './Pages/Dashboard/MyReviews';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
+import Loading from './Pages/Shared/Loading';
 
 function App() {
+    const [, loading] =useAuthState(auth);
+
+    if(loading) {
+        return <Loading></Loading>
+    }
+
     return (
         <>
             <Header></Header>
             <Routes>
                 <Route path="/" element={<Home />}></Route>
-                <Route path="/home" element={<Home />}></Route>
-                <Route path="/about" element={<About />}></Route>
+                <Route path="home" element={<Home />}></Route>
+                <Route path="about" element={<About />}></Route>
                 <Route
-                    path="/appointment"
+                    path="appointment"
                     element={
                         <RequiredAuth>
                             <Appointment />
                         </RequiredAuth>
                     }
                 ></Route>
-                <Route path="/reviews" element={<Reviews />}></Route>
-                <Route path="/contact-us" element={<ContactUs />}></Route>
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/signup" element={<SignUp />}></Route>
-                <Route path="/forget-password" element={<ForgetPassword />} ></Route>
+                <Route path="reviews" element={<Reviews />}></Route>
+                <Route path="contact-us" element={<ContactUs />}></Route>
+                <Route path='dashboard' element={<RequiredAuth><Dashboard /></RequiredAuth>}>
+                    <Route index element={<MyAppointment />}></Route>
+                    <Route path=':reviews' element={<MyReviews />}></Route>
+                </Route>
+                <Route path="login" element={<Login />}></Route>
+                <Route path="signup" element={<SignUp />}></Route>
+                <Route path="forget-password" element={<ForgetPassword />} ></Route>
             </Routes>
             <Footer></Footer>
             <ToastContainer />

@@ -102,7 +102,7 @@ const Login = () => {
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text">Password</span>
-                                <span class="label-text-alt"><Link className='text-secondary' to='/forget-password'>Forget Password?</Link></span>
+                                <span className="label-text-alt"><Link className='text-secondary' to='/forget-password'>Forget Password?</Link></span>
                             </label>
                             <input
                                 type="password"
