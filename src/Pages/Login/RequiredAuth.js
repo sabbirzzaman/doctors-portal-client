@@ -9,7 +9,7 @@ const RequiredAuth = ({children}) => {
     const location = useLocation();
 
     if(loading) {
-        return <Loading></Loading>
+        return <Loading height="100vh"></Loading>
     }
 
     if(!user) {

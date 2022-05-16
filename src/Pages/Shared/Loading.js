@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Loading = () => {
+const Loading = ({height}) => {
     return (
-        <div className='flex h-screen justify-center items-center'>
+        <div style={{height: height}} className='flex justify-center items-center'>
             <button className="btn loading btn-ghost">loading</button>
         </div>
     );

@@ -23,7 +23,7 @@ const ForgetPassword = () => {
     };
 
     if(sending) {
-        return <Loading></Loading>
+        return <Loading height="100vh"></Loading>
     }
 
     return (

@@ -49,7 +49,7 @@ const Login = () => {
     }
 
     if(loading) {
-        return <Loading></Loading>
+        return <Loading height="100vh"></Loading>
     }
 
     return (

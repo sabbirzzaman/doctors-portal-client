@@ -16,7 +16,7 @@ const AppointmentCard = ({ date }) => {
     )
 
     if(isLoading) {
-        return <Loading></Loading>
+        return <Loading height="100vh"></Loading>
     }
 
     return (

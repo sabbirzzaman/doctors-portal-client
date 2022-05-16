@@ -49,7 +49,7 @@ const SignUp = () => {
     }
 
     if( loading || updating) {
-        return <Loading></Loading>
+        return <Loading height="100vh"></Loading>
     }
 
     return (

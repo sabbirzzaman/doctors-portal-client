@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import ForgetPassword from './Pages/Login/ForgetPassword';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyAppointment from './Pages/Dashboard/MyAppointment';
-import MyReviews from './Pages/Dashboard/MyReviews';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import Loading from './Pages/Shared/Loading';
@@ -24,7 +23,7 @@ function App() {
     const [, loading] =useAuthState(auth);
 
     if(loading) {
-        return <Loading></Loading>
+        return <Loading height="100vh"></Loading>
     }
 
     return (
@@ -46,8 +45,8 @@ function App() {
                 <Route path="contact-us" element={<ContactUs />}></Route>
                 <Route path='dashboard' element={<RequiredAuth><Dashboard /></RequiredAuth>}>
                     <Route index element={<MyAppointment />}></Route>
-                    <Route path=':reviews' element={<MyReviews />}></Route>
-                    <Route path=':users' element={<Users />}></Route>
+                    <Route path='appointments' element={<MyAppointment />}></Route>
+                    <Route path='users' element={<Users />}></Route>
                 </Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="signup" element={<SignUp />}></Route>

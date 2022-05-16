@@ -4,18 +4,18 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 
 const MyAppointment = () => {
     const [{ email }] = useAuthState(auth);
 
-    const { data: bookings } = useQuery('bookings', () =>
+    const { data: bookings, isLoading } = useQuery('bookings', () =>
         fetch(`http://localhost:5000/bookings?email=${email}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             },
         }).then((res) => {
-            console.log(res);
             if (res.status === 401 || res.status === 403) {
                 signOut(auth);
                 toast.error('Login Expired');
@@ -24,6 +24,10 @@ const MyAppointment = () => {
             }
         })
     );
+
+    if(isLoading) {
+        return <Loading height="50vh"></Loading>
+    }
 
     return (
         <div className="overflow-x-auto">
