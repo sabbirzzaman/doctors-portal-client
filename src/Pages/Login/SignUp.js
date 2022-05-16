@@ -5,6 +5,7 @@ import auth from '../../firebase.init'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { toast } from 'react-toastify';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const [
@@ -26,6 +27,8 @@ const SignUp = () => {
     const location = useLocation();
     const navigate = useNavigate()
 
+    const [token] = useToken(user || gUser)
+
     const {
         register,
         formState: { errors },
@@ -39,11 +42,12 @@ const SignUp = () => {
 
     const from = location.state?.from?.pathname || "/";
 
-    useEffect(() => {
-        if(user || gUser) {
-            navigate(from, { replace: true });;
-        }
-    }, [user, gUser, from, navigate])
+    // useEffect(() => {
+    // }, [user, gUser, from, navigate])
+
+    if(token) {
+        navigate(from, { replace: true });;
+    }
 
     if(error || gError) {
         if(error.code === 'auth/email-already-in-use') {

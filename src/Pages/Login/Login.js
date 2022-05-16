@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { toast } from 'react-toastify';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const [
@@ -35,12 +36,16 @@ const Login = () => {
     const navigate = useNavigate()
 
     const from = location.state?.from?.pathname || "/";
+    
+    const [token] = useToken(user || gUser);
 
-    useEffect(() => {
-        if(user || gUser) {
-            navigate(from, { replace: true });;
-        }
-    }, [user, gUser, from, navigate])
+    // useEffect(() => {
+
+    // }, [token, from, navigate])
+
+    if(token) {
+        navigate(from, { replace: true });
+    }
 
     if(error || gError) {
         if(error.code === 'auth/user-not-found') {
