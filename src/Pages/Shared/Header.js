@@ -9,6 +9,11 @@ import auth from '../../firebase.init';
 const Header = () => {
     const [user, loading] = useAuthState(auth);
 
+    const handleSignOut = () => {
+        signOut(auth)
+        localStorage.removeItem('accessToken')
+    }
+
     const menu = (
         <>
             <li>
@@ -32,7 +37,7 @@ const Header = () => {
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <button
-                        onClick={() => signOut(auth)}
+                        onClick={handleSignOut}
                         className="btn btn-secondary text-white btn-sm"
                     >
                         Sign Out

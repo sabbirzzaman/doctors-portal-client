@@ -1,20 +1,14 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { toast } from 'react-toastify';
 import useToken from '../../hooks/useToken';
+import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
-    const [
-        signInWithGoogle, 
-        gUser,
-        gLoading,
-        gError
-    ] = useSignInWithGoogle(auth);
-
     const [
         createUserWithEmailAndPassword,
         user,
@@ -27,7 +21,7 @@ const SignUp = () => {
     const location = useLocation();
     const navigate = useNavigate()
 
-    const [token] = useToken(user || gUser)
+    const [token] = useToken(user)
 
     const {
         register,
@@ -42,20 +36,19 @@ const SignUp = () => {
 
     const from = location.state?.from?.pathname || "/";
 
-    // useEffect(() => {
-    // }, [user, gUser, from, navigate])
+    useEffect(() => {
+        if(token) {
+            navigate(from, { replace: true });;
+        }
+    }, [token, from, navigate])
 
-    if(token) {
-        navigate(from, { replace: true });;
-    }
-
-    if(error || gError) {
+    if(error) {
         if(error.code === 'auth/email-already-in-use') {
             toast.error('User already exist');
         }
     }
 
-    if( gLoading || loading || updating) {
+    if( loading || updating) {
         return <Loading></Loading>
     }
 
@@ -173,9 +166,7 @@ const SignUp = () => {
                             Already have an account? <Link className='text-secondary' to='/login'>Login</Link>
                         </p>
 
-                        <button className="btn btn-outline w-full" onClick={() => signInWithGoogle()}>
-                            Continue With Google
-                        </button>
+                        <SocialLogin></SocialLogin>
                     </form>
                 </div>
             </div>

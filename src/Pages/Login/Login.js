@@ -6,15 +6,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import { toast } from 'react-toastify';
 import useToken from '../../hooks/useToken';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
-    const [
-        signInWithGoogle, 
-        gUser, 
-        gLoading, 
-        gError
-    ] = useSignInWithGoogle(auth);
-
     const [
         signInWithEmailAndPassword,
         user,
@@ -37,17 +31,15 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || "/";
     
-    const [token] = useToken(user || gUser);
+    const [token] = useToken(user);
 
-    // useEffect(() => {
+    useEffect(() => {
+        if(token) {
+            navigate(from, { replace: true });;
+        }
+    }, [token, from, navigate])
 
-    // }, [token, from, navigate])
-
-    if(token) {
-        navigate(from, { replace: true });
-    }
-
-    if(error || gError) {
+    if(error) {
         if(error.code === 'auth/user-not-found') {
             toast.error('Wrong email or password!');
         }
@@ -56,7 +48,7 @@ const Login = () => {
         }
     }
 
-    if( gLoading || loading) {
+    if(loading) {
         return <Loading></Loading>
     }
 
@@ -154,12 +146,7 @@ const Login = () => {
                             </Link>
                         </p>
 
-                        <button
-                            className="btn btn-outline w-full"
-                            onClick={() => signInWithGoogle()}
-                        >
-                            Continue With Google
-                        </button>
+                        <SocialLogin></SocialLogin>
                     </form>
                 </div>
             </div>
