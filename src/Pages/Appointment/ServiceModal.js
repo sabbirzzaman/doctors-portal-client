@@ -22,7 +22,7 @@ const ServiceModal = ({ treatment, date, setTreatment, refetch }) => {
             appointmentSlot: e.target.slot.value,
         };
 
-        fetch('http://localhost:5000/treatment', {
+        fetch('https://doctors-portal-react.herokuapp.com/treatment', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -5,7 +5,7 @@ const UserTable = ({ user, serial, refetch }) => {
     const email = user.email;
 
     const makeAdmin = () => {
-        fetch(`http://localhost:5000/users/admin/${email}`, {
+        fetch(`https://doctors-portal-react.herokuapp.com/users/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`,

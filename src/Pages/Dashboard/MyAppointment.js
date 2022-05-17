@@ -10,7 +10,7 @@ const MyAppointment = () => {
     const [{ email }] = useAuthState(auth);
 
     const { data: bookings, isLoading } = useQuery('bookings', () =>
-        fetch(`http://localhost:5000/bookings?email=${email}`, {
+        fetch(`https://doctors-portal-react.herokuapp.com/bookings?email=${email}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`,

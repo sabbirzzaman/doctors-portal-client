@@ -5,7 +5,7 @@ import UserTable from './UserTable';
 
 const Users = () => {
     const { data: usersData, isLoading, refetch } = useQuery('users', () =>
-        fetch('http://localhost:5000/users', {
+        fetch('https://doctors-portal-react.herokuapp.com/users', {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`,
