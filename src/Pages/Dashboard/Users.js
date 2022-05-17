@@ -1,12 +1,20 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import Loading from '../Shared/Loading'
+import Loading from '../Shared/Loading';
+import UserTable from './UserTable';
 
 const Users = () => {
-    const {data: usersData, isLoading} = useQuery('users', () => fetch('http://localhost:5000/users').then(res => res.json()))
+    const { data: usersData, isLoading, refetch } = useQuery('users', () =>
+        fetch('http://localhost:5000/users', {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+        }).then((res) => res.json())
+    );
 
-    if(isLoading) {
-        return <Loading height="50vh"></Loading>
+    if (isLoading) {
+        return <Loading height="50vh"></Loading>;
     }
 
     return (
@@ -17,15 +25,12 @@ const Users = () => {
                         <th></th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Admin Control Panel</th>
                     </tr>
                 </thead>
                 <tbody>
                     {usersData?.map((user, index) => (
-                        <tr key={index}>
-                            <th>{index + 1}</th>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                        </tr>
+                        <UserTable key={index} user={user} serial={index + 1} refetch={refetch}></UserTable>
                     ))}
                 </tbody>
             </table>
