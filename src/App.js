@@ -19,6 +19,7 @@ import auth from './firebase.init';
 import Loading from './Pages/Shared/Loading';
 import Users from './Pages/Dashboard/Users';
 import RequiredAdmin from './Pages/Dashboard/RequiredAdmin';
+import AddDoctor from './Pages/Dashboard/AddDoctor';
 
 function App() {
     const [, loading] =useAuthState(auth);
@@ -48,6 +49,7 @@ function App() {
                     <Route index element={<MyAppointment />}></Route>
                     <Route path='appointments' element={<MyAppointment />}></Route>
                     <Route path='users' element={<RequiredAdmin><Users /></RequiredAdmin>}></Route>
+                    <Route path='add-doctor' element={<RequiredAdmin><AddDoctor /></RequiredAdmin>}></Route>
                 </Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="signup" element={<SignUp />}></Route>
