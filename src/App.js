@@ -18,6 +18,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import Loading from './Pages/Shared/Loading';
 import Users from './Pages/Dashboard/Users';
+import RequiredAdmin from './Pages/Dashboard/RequiredAdmin';
 
 function App() {
     const [, loading] =useAuthState(auth);
@@ -46,7 +47,7 @@ function App() {
                 <Route path='dashboard' element={<RequiredAuth><Dashboard /></RequiredAuth>}>
                     <Route index element={<MyAppointment />}></Route>
                     <Route path='appointments' element={<MyAppointment />}></Route>
-                    <Route path='users' element={<Users />}></Route>
+                    <Route path='users' element={<RequiredAdmin><Users /></RequiredAdmin>}></Route>
                 </Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="signup" element={<SignUp />}></Route>

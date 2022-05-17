@@ -30,7 +30,7 @@ const Dashboard = () => {
                                 My Appointment
                             </Link>
                         </li>
-                        {admin.admin && (
+                        {admin && (
                             <li>
                                 <Link to="/dashboard/users">All Users</Link>
                             </li>
