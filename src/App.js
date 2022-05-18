@@ -20,6 +20,7 @@ import Loading from './Pages/Shared/Loading';
 import Users from './Pages/Dashboard/Users';
 import RequiredAdmin from './Pages/Dashboard/RequiredAdmin';
 import AddDoctor from './Pages/Dashboard/AddDoctor';
+import ManageDoctors from './Pages/Dashboard/ManageDoctors';
 
 function App() {
     const [, loading] =useAuthState(auth);
@@ -50,6 +51,7 @@ function App() {
                     <Route path='appointments' element={<MyAppointment />}></Route>
                     <Route path='users' element={<RequiredAdmin><Users /></RequiredAdmin>}></Route>
                     <Route path='add-doctor' element={<RequiredAdmin><AddDoctor /></RequiredAdmin>}></Route>
+                    <Route path='manage-doctors' element={<RequiredAdmin><ManageDoctors /></RequiredAdmin>}></Route>
                 </Route>
                 <Route path="login" element={<Login />}></Route>
                 <Route path="signup" element={<SignUp />}></Route>
