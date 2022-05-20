@@ -2,6 +2,7 @@ import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
@@ -39,16 +40,19 @@ const MyAppointment = () => {
                         <th>Treatment</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Payment</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {bookings?.map((booking, index) => (
+                    {bookings?.map((b, index) => (
                         <tr key={index}>
                             <th>{index + 1}</th>
-                            <td>{booking.patientName}</td>
-                            <td>{booking.treatmentName}</td>
-                            <td>{booking.appointmentDate}</td>
-                            <td>{booking.appointmentSlot}</td>
+                            <td>{b.patientName}</td>
+                            <td>{b.treatmentName}</td>
+                            <td>{b.appointmentDate}</td>
+                            <td>{b.appointmentSlot}</td>
+                            <td>{(b.treatmentPrice && !b.paid) && <Link className='btn btn-secondary text-white btn-sm' to={`/dashboard/payment/${b._id}`}>Pay</Link>}</td>
+                            <td>{(b.treatmentPrice && b.paid) && <button className='btn btn-secondary text-white btn-sm'>Paid</button>}</td>
                         </tr>
                     ))}
                 </tbody>
